@@ -1,0 +1,101 @@
+
+
+.title-text{
+    background-color: transparent;
+    color: white;
+    font-size: 5vw;
+    font-style: italic;
+    text-align: center;
+    text-shadow: -6px 0 black, 0 6px black, 6px 0 black, 0 -6px black;
+}
+
+.title-text:hover{
+    text-shadow: 0px 0px 10px royalblue;
+}
+ .responsive img{
+     margin-left: auto;
+     margin-right: auto;
+     width: 75%;
+     display: block;
+     height: auto;
+}
+
+ .brand-logo img{
+     border-radius: 10%;
+     width: 15%;
+     heigth: auto;
+     display: block;
+ }
+
+ .brand-logo img:hover{
+     box-shadow: 0px 0px 10px dodgerblue;
+ }
+
+ .page-color{
+     border-radius: 2%;
+     background-color: white;
+     width: 95%;
+     height: auto;
+     margin: auto;
+     box-shadow: 5px 5px 5px 15px antiquewhite;
+ }
+
+.background {
+     background: url("../resources/splash.png");
+     background-color: dodgerblue;
+     background-repeat:no-repeat;
+     background-size:contain;
+     background-position: top;
+     max-width: 95%;
+     margin-right: auto;
+     margin-left: auto;
+ }
+
+.page-content {
+    width: 100%;
+    heigth: auto;
+}
+
+.page-content h3{
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-family: "Ubuntu",sans-serif;
+    color: #666;
+    margin-left: 10px;
+    word-wrap: break-word;
+}
+
+.page-label {
+    margin-left: 10px;
+    font-size: 25px;
+    font-style: italic;
+    color: #2574a9;
+    font-family: "Fondamento",cursive;
+    display: block;
+}
+
+.page-content h1{
+    font-size: 2vw;
+    font-style: italic;
+    color: #2574a9;
+    font-family: "Fondamento",cursive;
+    text-align: center;
+}
+
+.gravatar img{
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    display: block;
+    height: auto;
+}
+
+#feedback-widget img {
+    margin-left: auto;
+    width: 20%;
+    display: block;
+    height: auto;
+}
