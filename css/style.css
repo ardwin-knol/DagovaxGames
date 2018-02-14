@@ -21,10 +21,12 @@
 }
 
  .brand-logo img{
+     float: left;
      border-radius: 10%;
      width: 15%;
      heigth: auto;
      display: block;
+     margin-left: 20px;
  }
 
  .brand-logo img:hover{
@@ -36,7 +38,9 @@
      background-color: white;
      width: 95%;
      height: auto;
-     margin: auto;
+     margin-left: auto;
+     margin-right: auto;
+     margin-top: 16%;
      box-shadow: 5px 5px 5px 15px antiquewhite;
  }
 
@@ -46,7 +50,6 @@
      background-repeat:no-repeat;
      background-size:contain;
      background-position: top;
-     max-width: 95%;
      margin-right: auto;
      margin-left: auto;
  }
@@ -89,13 +92,6 @@
     margin-left: auto;
     margin-right: auto;
     width: 25%;
-    display: block;
-    height: auto;
-}
-
-#feedback-widget img {
-    margin-left: auto;
-    width: 20%;
     display: block;
     height: auto;
 }

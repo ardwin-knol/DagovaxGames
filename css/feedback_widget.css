@@ -1,3 +1,23 @@
-#weather {
-    position: relative;
+#widget-content {
+    width: 25%;
+    height: 30%;
+    /*left: 97.5%;*/
+    left: 75%;
+    top: 75%;
+    position: fixed;
+}
+
+.top-image img {
+    float:left;
+    width: 10%;
+    heigth: auto;
+}
+
+.bottom{
+    float:right;
+    width: 90%;
+    height: 100%;
+    background-color: silver;
+    color: #2574a9;
+    border-radius: 2%;
 }

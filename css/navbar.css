@@ -1,11 +1,14 @@
 
 /* Add a black background color to the top navigation */
 .menu-bar {
-
+    top: 2%;
+    position: fixed;
+    width: 100%;
     background-color: royalblue;
     overflow: hidden;
     margin-top: -20px;
     border: 1px solid black;
+    height: auto;
 }
 
 /* Style the links inside the navigation bar */
