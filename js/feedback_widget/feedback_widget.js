@@ -1,3 +1,54 @@
+function FeedbackWidget(wrapper_id) {
+    this.wrapper_id = '#' + wrapper_id;
+    this.isInit = false;
+    this.open = open;
+    this.close = close;
+    this.init = init;
+
+    function init(id) {
+        this.isInit = true;
+        var feedback_id = '#' + id;
+        var isAnimated = false;
+
+        $(this.wrapper_id).on('click', function (e) {
+            e.stopPropagation();
+            if (!isAnimated) {
+                (feedback_id).open();
+                isAnimated = true;
+            }
+            else if (isAnimated) {
+                (feedback_id).close();
+                isAnimated = false;
+            }
+        });
+    }
+
+    function open() {
+            $(this.feedback_id).animate({
+                'left': '75%',
+            }, 1000);
+    }
+
+    function close() {
+            $(this.feedback_id).animate({
+                'left': '97.5%',
+            }, 1000);
+    }
+
+    $(function () {
+        var feedbackWidget = new FeedbackWidget('widget-content');
+        feedbackWidget.init('widget-content');
+    });
+};
+
+
+
+
+
+
+
+
+
 // function FeedbackWidget(wrapper_id) {
 //     this.wrapper_id = '#' + wrapper_id;
 //     this.isInit = false;
@@ -43,6 +94,31 @@
 //     feedbackWidget.init('feedback-widget');
 // });
 
-$(function FeedbackWidget(){
-
-})
+// $(document).ready(function FeedbackWidget(){
+//
+//     $('#widget-content > #widget').on('click', function (){
+//         var isClicked = false;
+//         if (!isClicked) {
+//             var col =$('#widget-content')
+//             col
+//                 .css({
+//                     'left': '75%'
+//                 })
+//                 .animate({
+//                     'left': '75%'
+//                 });
+//             isClicked = true;
+//         }
+//         else{
+//             var col =$('#widget-content')
+//             col
+//                 .css({
+//                     'left' : '97.5%'
+//                 })
+//                 .animate({
+//                     'left' : '97.5%'
+//                 });
+//             isClicked = false;
+//             }
+//     });
+// });

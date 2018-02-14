@@ -1,8 +1,7 @@
 #widget-content {
     width: 25%;
     height: 30%;
-    /*left: 97.5%;*/
-    left: 75%;
+    left: 97.5%;
     top: 75%;
     position: fixed;
 }
