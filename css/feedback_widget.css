@@ -1,22 +1,61 @@
 #widget-content {
     width: 25%;
-    height: 30%;
+    height: auto;
     left: 97.5%;
-    top: 75%;
+    top: 45%;
     position: fixed;
 }
 
-.top-image img {
+#top-image img {
     float:left;
     width: 10%;
     heigth: auto;
 }
 
-.bottom{
+#widget-layout{
     float:right;
     width: 90%;
-    height: 100%;
-    background-color: silver;
+    height: auto;
+    background-color: #efefef;
     color: #2574a9;
-    border-radius: 2%;
+    border-top-left-radius: 3%;
+    border-top-right-radius: 3%;
+}
+
+#widget-top{
+    height: 30%;
+    background-color: dodgerblue;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 5px solid dodgerblue;
+    text-align: right;
+}
+
+#widget-top img{
+    width: 10%;
+    height: 10%;
+    margin-top: 2%;
+}
+
+#widget-bottom{
+    height: 70%;
+    border-radius: 5px;
+    box-shadow: 0 10px 0 -3px rgba(0,0,0,.2),0 2px 0 rgba(0,0,0,.1);
+}
+
+#widget-top img:hover {
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    filter: brightness(200%);
+}
+
+#widget-bottom p{
+    margin-left: 10px;
 }
