@@ -1,28 +1,25 @@
 {
-  
-	"name": "",
-  
-	"devDependencies": 
-		{
-    
-			"gulp": "^3.9.1",
-    
-			"gulp-autoprefixer": "^4.1.0",
-    
-			"gulp-clean-css": "^3.9.2",
-    
-			"gulp-concat": "^2.6.1",
-    
-			"gulp-livereload": "^3.8.1",
-    
-			"gulp-sass": "^3.1.0",
-    
-			"mocha": "^5.0.1"
-  
-		},
-  
-	"version": "",
-	"scripts": {
-    		"test": "mocha"
-  	}
+ "name": "",
+ "devDependencies": {
+  "gulp": "^3.9.1",
+  "gulp-autoprefixer": "^4.1.0",
+  "gulp-clean-css": "^3.9.2",
+  "gulp-concat": "^2.6.1",
+  "gulp-livereload": "^3.8.1",
+  "gulp-sass": "^3.1.0",
+  "mocha": "^5.0.1"
+ },
+ "version": "",
+ "scripts": {
+  "test": "mocha"
+ },
+ "dependencies": {
+  "gulp-declare": "^0.3.0",
+  "gulp-handlebars": "^5.0.2",
+  "gulp-order": "^1.1.1",
+  "gulp-uglifyjs": "^0.6.2",
+  "gulp-wrap": "^0.13.0",
+  "handlebars": "^4.0.11",
+  "minify": "^3.0.4"
+ }
 }

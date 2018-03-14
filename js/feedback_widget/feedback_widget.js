@@ -1,82 +1,104 @@
-// function FeedbackWidget(image_id) {
-//     this.image_id = '#' + image_id;
-//     this.isInit = false;
-//     this.open = open;
-//     this.close = close;
-//     this.init = init;
+// $(document).ready(function FeedbackWidget(){
+//     //removes availabilty of the user to drag the images
+//     $('img').on('dragstart', function(event) { event.preventDefault(); });
 //
-//     function init(id) {
-//         this.isInit = true;
-//         var feedback_id = '#' + id;
-//         var isAnimated = false;
+//     var isClicked = false;
 //
-//         $(this.image_id).on('click', function () {
-//             if (!isAnimated) {
-//                 $feedback_id.open();
-//                 isAnimated = true;
-//                 console.log(isAnimated);
-//                 console.log('showing widget...');
-//             }
-//             else if (isAnimated) {
-//                 $feedback_id.close();
-//                 isAnimated = false;
-//                 console.log(isAnimated);
-//                 console.log('hiding widget...');
-//             }
-//         });
+//     $('#top-image').click(function (){
+//         open();
+//     });
+//
+//     $('#widget-top img').click(function (){
+//         close();
+//     });
+//
+//     function close() {
+//             $('#widget-content').animate({
+//                 'left': '97.5%'
+//             }, 1000);
+//             $('#top-image img').animate({
+//                 opacity:1
+//             }, 1000);
+//             isClicked = false;
 //     }
 //
 //     function open() {
-//             $(this.feedback_id).animate({
+//             $('#widget-content').animate({
 //                 'left': '75%'
 //             }, 1000);
-//     }
-//
-//     function close() {
-//             $(this.feedback_id).animate({
-//                 'left': '97.5%'
+//             $('#top-image img').animate({
+//                 opacity:0
 //             }, 1000);
+//             isClicked = true;
 //     }
-//
-//     $(function () {
-//         var feedbackWidget = new FeedbackWidget('widget-content');
-//         feedbackWidget.init('top-image');
-//     });
-// };
+// });
 
+function FeedbackWidget(wrapper_id){
 
-
-$(document).ready(function FeedbackWidget(){
     //removes availabilty of the user to drag the images
     $('img').on('dragstart', function(event) { event.preventDefault(); });
 
+    this.wrapper_id = '#' + wrapper_id;
+    this.isInit = false;
+    this.open = open;
+    this.close = close;
+    this.init = init;
+
     var isClicked = false;
+    var close_button;
 
-    $('#top-image').click(function (){
-        open();
+    function init(open_id, wrapper_id, close_id) {
+        this.isInit = true;
+        this = '#' + close_id;
+        var open_button = '#' + open_id;
+        var wrap_id = '#' + wrapper_id;
+
+        $(open_button).on('click', function () {
+            console.log(isClicked);
+            console.log(wrap_id);
+
+            this.close_button = close_button + ' img';
+            console.log(close);
+
+            if(!isClicked) {
+                open(open_button, wrap_id);
+                isClicked = true;
+            }
+        });
+    };
+
+    //
+    // $('#widget-top img').click(function (){
+    //     close();
+    // });
+
+    $(this.close_button).click (function () {
+        console.log(isClicked);
+
+        close(open_button, wrap_id);
+        isClicked = false;
     });
 
-    $('#widget-top img').click(function (){
-        close();
-    });
-
-    function close() {
-            $('#widget-content').animate({
-                'left': '97.5%'
-            }, 1000);
-            $('#top-image img').animate({
-                opacity:1
-            }, 1000);
-            isClicked = false;
+    function open(open_button, wrap_id) {
+        $(wrap_id).animate({
+            'left': '75%'
+        }, 1000);
+        $(open_button +' img').animate({
+            opacity:0
+        }, 1000);
     }
 
-    function open() {
-            $('#widget-content').animate({
-                'left': '75%'
-            }, 1000);
-            $('#top-image img').animate({
-                opacity:0
-            }, 1000);
-            isClicked = true;
+    function close(open_button, wrap_id) {
+        $(wrap_id).animate({
+            'left': '97.5%'
+        }, 1000);
+        $(open_button +' img').animate({
+            opacity:1
+        }, 1000);
     }
+}
+
+$(function () {
+    var feedbackWidget = new FeedbackWidget('widget-content');
+    feedbackWidget.init('top-image', 'widget-content', 'widget_top');
 });
