@@ -17,7 +17,24 @@ const files_vendor = [
     'vendor/handlebars-runtime-3/handlebars.js'
 ];
 
-gulp.task('build', ['html', 'css', 'vendor', 'js', 'feedback', 'images', 'templates', 'sass'], function () {
+const files_js = [
+    'js/**/*.js',
+    'js/*.js',
+    'features/**/*.js'
+];
+
+const files_js_order = [
+    'js/spa.js',
+    'js/spa.template.js',
+    'js/spa.util.js',
+    'js/spa.util_b.js',
+    'js/spa.router.js',
+    'js/spa.shell.js',
+    'js/*.js',
+    'features/**/*.js'
+];
+
+gulp.task('build', ['html', 'templates', 'css', 'vendor', 'build_js', 'feedback', 'images', 'sass'], function () {
 
 });
 
@@ -45,10 +62,18 @@ gulp.task('vendor', function(){
         .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('js', function (){
-    gulp.src(['./js/*.js'])
+gulp.task('js', function () {
+    return gulp.src(files_js)
+        .pipe(order(files_js_order, { base: './' }))
         .pipe(concat('app.js'))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('build_js', function () {
+    return gulp.src(files_js)
+        .pipe(order(files_js_order, { base: './' }))
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('feedback', function (){
@@ -97,3 +122,5 @@ gulp.task('watch', function () {
         gulp.watch(['css/*.css', 'features/**/*.css'], ['css']);
         gulp.watch(['js/*.js', 'features/**/*.js'], ['templates','js']);
 });
+
+gulp.task('default', ['templates']);

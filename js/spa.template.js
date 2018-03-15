@@ -32,10 +32,10 @@ spa.template = (function () {
     //  * Object, data which will be parsed.
     // Returns: String with html.
     parseTemplate = function(template_path, data){
-        debugger
 
         var template_func = spa.util.fetchFromObject(stateMap.template_collection, template_path);
-        return template_func(data);
+        var result = template_func(data);
+        return result;
     };
 
 // Begin public method /configModule/

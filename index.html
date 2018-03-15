@@ -1,23 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta  charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dagovax Games</title>
     <link rel="stylesheet" href="style.min.css" type = text/css>
     <link rel="shortcut icon" href="./images/loading_logo.png">
-
-    <!-- script section -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/vendor.js"></script>
-    <script src="./js/app.js"></script>
-    <script src="./js/feedback_widget.js"></script>
-
-    <script>
-        $(function () {
-            debugger
-            spa.initModule($('#spa'));
-        });
-    </script>
 
 </head>
 <body class="background">
@@ -41,70 +28,91 @@
             <div id="widget-layout">
                 <div class="container">
                     <div id="widget-top">
-                        <img src="./images/close.png">
+                        <img id="close-button" src="./images/close.png">
                     </div>
                     <div id="widget-bottom">
-                        <p>Geef hieronder uw feedback over de website:</p>
+                        <p id="feedback-title">Give your feedback belowe and hit 'submit'</p><br>
+                        <div id="input-text">
+                        </div>
                         <form>
-                            <input type="text" name="input_text"><br>
-                            <input type="submit" value="Verstuur">
+                            <input type="text" id="textbox-field" name="input_text">
+                            <input type="button" id="submit-button" value="Submit">
                         </form>
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div>
-        <div class="menu-bar" id="myTopnav">
-            <a href="index.html" class="active">Home</a>
-            <a href="#holland-total-war">Holland: Total War</a>
-            <a href="#israel-mod">Israel Mod</a>
-            <a href="#praetorian-cohorts">Praetorian Cohorts</a>
-            <a href="#questions">Questions and Requests</a>
-            <a href ="#contact">Contact</a>
-            <a href="javascript:void(0);" class="icon" onclick="navBar()">&#9776;</a>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="brand-logo">
-            <img src="./images/logo%20dagovax.jpg">
-        </div>
-        <div class="title-text">
-            <h1>Dagovax Games</h1>
-        </div>
-    </div>
-    <div class="container">
-        <div class="page-color">
-
-            <div class="container">
-                <header class="page-label">
-                    <h1>Home</h1>
-                </header>
-                <div class="page-content">
-                    <h3>
-                        Welcome to the official webpage of Sirrianus Dagovax!
-                        Choose your game info or modfolder by hitting it in the menu. All my own mods of Rome: Total War are placed there. I hope you will learn more about modding or my mods. For more info, please contact me.
-                        <br><br><br>
-                        Holland: Total War is now finished!
-                    </h3>
-                    <br><br>
-                    <h1>Dagovax</h1>
-                    <div class="gravatar">
-                        <img src="./images/gravatar.png">
-                    </div>
-                    <br><br>
-
-                </div>
+    <div class="spa-shell-head">
+        <div>
+            <div class="menu-bar" id="myTopnav">
+                <a class = "home" href="/">Home</a>
+                <a class = "spa-shell-head-holland-total-war" href="/holland-total-war">Holland: Total War</a>
+                <a class = "spa-shell-head-israel-mod" href="/israel-mod">Israel Mod</a>
+                <a class = "spa-shell-head-praetorian-cohorts" href="/praetorian-cohorts">Praetorian Cohorts</a>
+                <a class = "spa-shell-head-questions" href="/questions">Questions and Requests</a>
+                <a class = "spa-shell-head-contact" href="/contact">Contact</a>
+                <a href="javascript:void(0);" class="icon" onclick="navBar()">&#9776;</a>
             </div>
         </div>
     </div>
+
+    <div class="spa-shell-main">
+        <div class="container">
+            <div class="spa-shell-main-nav">
+                <nav>
+                    <div class="spa-shell-head-logo brand">
+                        <div class="brand-logo">
+                            <img src="./images/logo%20dagovax.jpg">
+                        </div>
+                        <ul class="nav-items"></ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="title-text">
+                <h1>Dagovax Games</h1>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+            <div class="page-color">
+
+                <div class="container">
+                    <div class="spa-shell-main-content">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer class="spa-shell-foot">
+    </footer>
+    <div class="spa-shell-modal"></div>
 </div>
 </body>
-
+<!-- script section -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/vendor.js"></script>
+<script src="js/templates.js"></script>
+<script src="js/app.js"></script>
+<script src="js/feedback_widget.js"></script>
 
 <script>
+    $(function () {
+        spa.initModule($('#spa'));
+    });
+</script>
+
+<script>
+    $(function () {
+        var feedbackWidget = new FeedbackWidget('top-image','widget-content', 'close-button');
+        feedbackWidget.init();
+    });
+</script>
+
+<script>
+
     $(function () {
         setTimeout(function () {
             $('body').addClass('loaded');

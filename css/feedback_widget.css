@@ -1,14 +1,14 @@
 #widget-content {
-    width: 25%;
+    width: 480px;
     height: auto;
-    left: 97.5%;
+    right: -435px;
     top: 45%;
     position: fixed;
 }
 
 #top-image img {
     float:left;
-    width: 10%;
+    width: 47px;
     heigth: auto;
 }
 

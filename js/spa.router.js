@@ -23,10 +23,12 @@ spa.router = (function () {
         stateMap = {$container: null},
         jqueryMap = {},
         setJqueryMap,
-        showLoginPage,
         showHomepage,
-        showTestPage,
-        logOut,
+        showHollandTotalWarPage,
+        showIsraelModPage,
+        showPraetorianCohortPage,
+        showContactPage,
+        showQuestionsPage,
         configModule, initModule;
 //----------------- END MODULE SCOPE VARIABLES ---------------
 
@@ -45,35 +47,45 @@ spa.router = (function () {
         };
     };
 
-    showLoginPage = function(){
-        //debugger;
-        console.log('show login page...');
-        var html = spa.template.parseTemplate('features.login.login', {});
-        jqueryMap.$page_container.html(html);
-        // console.log('verwachte exceptie:');
-        // console.log("vendor.js:4266 Uncaught DOMException: Failed to execute 'pushState' on 'History': A history state object with URL...");
-
-    };
-
     showHomepage = function () {
-        console.log('homepage');
+        console.log('home');
         var html = spa.template
-            .parseTemplate('features.homepage.homepage', {});
+            .parseTemplate('features.home.home', {});
         jqueryMap.$page_container.html(html);
     };
 
-    showTestPage = function () {
-        console.log('testpage');
+    showHollandTotalWarPage = function () {
+        console.log('holland: total war');
         var html = spa.template
-            .parseTemplate('features.testpage.testpage', {});
+            .parseTemplate('features.hollandtw.hollandtw', {});
         jqueryMap.$page_container.html(html);
     };
 
-    logOut = function(){
-        //debugger;
-        console.log('logging out');
-        var name = "Geert Timmer";
-        var html = spa.template.parseTemplate('features.logout.logout', {name: name});
+    showIsraelModPage = function () {
+        console.log('israel mod');
+        var html = spa.template
+            .parseTemplate('features.israelmod.israelmod', {});
+        jqueryMap.$page_container.html(html);
+    };
+
+    showPraetorianCohortPage = function () {
+        console.log('praetorian cohorts');
+        var html = spa.template
+            .parseTemplate('features.praetorian_cohort.praetorian_cohort', {});
+        jqueryMap.$page_container.html(html);
+    };
+
+    showQuestionsPage = function () {
+        console.log('questions');
+        var html = spa.template
+            .parseTemplate('features.questions.questions', {});
+        jqueryMap.$page_container.html(html);
+    };
+
+    showContactPage = function () {
+        console.log('contact');
+        var html = spa.template
+            .parseTemplate('features.contact.contact', {});
         jqueryMap.$page_container.html(html);
     };
 
@@ -116,18 +128,14 @@ spa.router = (function () {
         stateMap.$container = $container;
         setJqueryMap();
 
-        // the "notfound" implements a catch-all
-        // with page('*', notfound). Here we have
-        // no catch-all, so page.js will redirect
-        // to the location of paths which do not
-        // match any of the following routes
-        // var baseUrl = 'file:///C:/Users/EB0095856/Documents/Projecten/client_upgrade/labs/spa_routing_templating/dist/index.html';
         page.base('');
         page('/', showHomepage);
         page('/index.html', showHomepage);
-        page('/login', showLoginPage);
-        page('/test', showTestPage);
-        page('/logout', logOut);
+        page('/holland-total-war', showHollandTotalWarPage);
+        page('/israel-mod', showIsraelModPage);
+        page('/praetorian-cohorts', showPraetorianCohortPage);
+        page('/questions', showQuestionsPage);
+        page('/contact', showContactPage);
         page();
 
         return true;

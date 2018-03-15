@@ -1,104 +1,101 @@
-// $(document).ready(function FeedbackWidget(){
-//     //removes availabilty of the user to drag the images
-//     $('img').on('dragstart', function(event) { event.preventDefault(); });
-//
-//     var isClicked = false;
-//
-//     $('#top-image').click(function (){
-//         open();
-//     });
-//
-//     $('#widget-top img').click(function (){
-//         close();
-//     });
-//
-//     function close() {
-//             $('#widget-content').animate({
-//                 'left': '97.5%'
-//             }, 1000);
-//             $('#top-image img').animate({
-//                 opacity:1
-//             }, 1000);
-//             isClicked = false;
-//     }
-//
-//     function open() {
-//             $('#widget-content').animate({
-//                 'left': '75%'
-//             }, 1000);
-//             $('#top-image img').animate({
-//                 opacity:0
-//             }, 1000);
-//             isClicked = true;
-//     }
-// });
-
-function FeedbackWidget(wrapper_id){
+function FeedbackWidget(open_button, wrapper_id, close_button){
 
     //removes availabilty of the user to drag the images
     $('img').on('dragstart', function(event) { event.preventDefault(); });
 
-    this.wrapper_id = '#' + wrapper_id;
+    this.wrapper_id = wrapper_id;
+    this.open_button = open_button;
+    this.close_button = close_button;
     this.isInit = false;
     this.open = open;
     this.close = close;
     this.init = init;
 
     var isClicked = false;
-    var close_button;
 
-    function init(open_id, wrapper_id, close_id) {
+    function init() {
         this.isInit = true;
-        this = '#' + close_id;
-        var open_button = '#' + open_id;
-        var wrap_id = '#' + wrapper_id;
 
-        $(open_button).on('click', function () {
-            console.log(isClicked);
-            console.log(wrap_id);
-
-            this.close_button = close_button + ' img';
-            console.log(close);
+        document.getElementById(this.open_button).onclick = function () {
 
             if(!isClicked) {
-                open(open_button, wrap_id);
-                isClicked = true;
+                open();
             }
-        });
+        }
+
+        document.getElementById(this.close_button).onclick = function () {
+
+            if(isClicked) {
+                close();
+            }
+        }
     };
 
-    //
-    // $('#widget-top img').click(function (){
-    //     close();
-    // });
-
-    $(this.close_button).click (function () {
-        console.log(isClicked);
-
-        close(open_button, wrap_id);
-        isClicked = false;
-    });
-
-    function open(open_button, wrap_id) {
-        $(wrap_id).animate({
-            'left': '75%'
+    function open() {
+        var wrap = '#'+wrapper_id;
+        var transparent = '#'+open_button;
+        $(wrap).animate({
+            'right': '0px'
         }, 1000);
-        $(open_button +' img').animate({
+        $(transparent +' img').animate({
             opacity:0
         }, 1000);
+        isClicked = true;
     }
 
-    function close(open_button, wrap_id) {
-        $(wrap_id).animate({
-            'left': '97.5%'
+    function close() {
+        var wrap = '#'+wrapper_id;
+        var transparent = '#'+open_button;
+        $(wrap).animate({
+            'right': '-435px'
         }, 1000);
-        $(open_button +' img').animate({
+        $(transparent +' img').animate({
             opacity:1
         }, 1000);
+        isClicked = false;
     }
-}
 
-$(function () {
-    var feedbackWidget = new FeedbackWidget('widget-content');
-    feedbackWidget.init('top-image', 'widget-content', 'widget_top');
-});
+    function close_final() {
+        var wrap = '#'+wrapper_id;
+        var transparent = '#'+open_button;
+        $(wrap).animate({
+            'left': '97.5%'
+        }, 1000);
+        $(transparent +' img').animate({
+            opacity:1
+        }, 1000);
+        isClicked = false;
+        setTimeout(set_feedbackSubmitted, 1000);
+    }
+
+    function set_feedbackSubmitted(){
+        show_text("<strong>You already submitted your feedback!</strong>");
+        document.getElementById("widget-top").style.background = "orange";
+    }
+
+    function disable_button(){
+        $('#submit-button').hide();
+        $('#textbox-field').hide();
+    }
+
+    function show_text(html) {
+        console.log(html);
+        $('#input-text').html(html);
+    }
+
+    $('#submit-button').click(function(){
+        var user_input = document.getElementById('textbox-field').value;
+        if (user_input == ""){
+            show_text("<strong>  Please enter something before you click 'submit'</strong>");
+            document.getElementById("widget-top").style.background = "red";
+        }
+        else{
+            show_text("<strong>  Thank you for your feedback!</strong>");
+            disable_button();
+            document.getElementById("widget-top").style.background = "green";
+            setTimeout(close_final, 3000);
+            $('#feedback-title').hide();
+        }
+        console.log(user_input);
+    })
+}
