@@ -1,8 +1,5 @@
 function FeedbackWidget(open_button, wrapper_id, close_button){
 
-    //removes availabilty of the user to drag the images
-    $('img').on('dragstart', function(event) { event.preventDefault(); });
-
     this.wrapper_id = wrapper_id;
     this.open_button = open_button;
     this.close_button = close_button;
@@ -59,7 +56,7 @@ function FeedbackWidget(open_button, wrapper_id, close_button){
         var wrap = '#'+wrapper_id;
         var transparent = '#'+open_button;
         $(wrap).animate({
-            'left': '97.5%'
+            'right': '-435px'
         }, 1000);
         $(transparent +' img').animate({
             opacity:1

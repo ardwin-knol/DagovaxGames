@@ -1,8 +1,21 @@
-<head>
-    <link rel="shortcut icon" href="./images/loading_logo.png">
-</head>
+<script>
+    document.onkeydown = fkey;
+    document.onkeypress = fkey
+    document.onkeyup = fkey;
 
-<header class="page-label">
+    var wasPressed = false;
+
+    function fkey(e) {
+        e = e || window.event;
+        if (wasPressed) return;
+
+        if (e.keyCode == 116) {
+            window.location.href = "./index.html";
+            wasPressed = true;
+        }
+    }
+</script>
+header class="page-label">
     <h1>Home</h1>
 </header>
 <div class="page-content">
@@ -15,7 +28,7 @@
     <br><br>
     <h1>Dagovax</h1>
     <div class="gravatar">
-        <img src="./images/gravatar.png">
+        <img src="/DagovaxGames/dist/images/gravatar.png">
     </div>
     <br><br>
 

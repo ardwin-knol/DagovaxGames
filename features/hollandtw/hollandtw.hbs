@@ -1,7 +1,20 @@
-<head>
-    <link rel="shortcut icon" href="./DagovaxGames/dist/images/loading_logo.png">
-</head>
+<script>
+    document.onkeydown = fkey;
+    document.onkeypress = fkey
+    document.onkeyup = fkey;
 
+    var wasPressed = false;
+
+    function fkey(e) {
+        e = e || window.event;
+        if (wasPressed) return;
+
+        if (e.keyCode == 116) {
+            window.location.href = "./index.html";
+            wasPressed = true;
+        }
+    }
+</script>
 <header class="page-label">
     <h1>Holland: Total War</h1>
 </header>

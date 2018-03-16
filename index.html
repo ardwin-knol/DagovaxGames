@@ -5,6 +5,7 @@
     <title>Dagovax Games</title>
     <link rel="stylesheet" href="style.min.css" type = text/css>
     <link rel="shortcut icon" href="./images/loading_logo.png">
+    <link rel="stylesheet" type="text/css" href="mario_game/mario.css">
 
 </head>
 <body class="background">
@@ -48,12 +49,12 @@
     <div class="spa-shell-head">
         <div>
             <div class="menu-bar" id="myTopnav">
-                <a class = "home" href="/">Home</a>
-                <a class = "spa-shell-head-holland-total-war" href="/holland-total-war">Holland: Total War</a>
-                <a class = "spa-shell-head-israel-mod" href="/israel-mod">Israel Mod</a>
-                <a class = "spa-shell-head-praetorian-cohorts" href="/praetorian-cohorts">Praetorian Cohorts</a>
-                <a class = "spa-shell-head-questions" href="/questions">Questions and Requests</a>
-                <a class = "spa-shell-head-contact" href="/contact">Contact</a>
+                <a class = "home" href="/DagovaxGames/dist/index.html">Home</a>
+                <a class = "spa-shell-head-holland-total-war" href="/DagovaxGames/dist/holland-total-war">Holland: Total War</a>
+                <a class = "spa-shell-head-israel-mod" href="/DagovaxGames/dist/israel-mod">Israel Mod</a>
+                <a class = "spa-shell-head-praetorian-cohorts" href="/DagovaxGames/dist/praetorian-cohorts">Praetorian Cohorts</a>
+                <a class = "spa-shell-head-contact" href="/DagovaxGames/dist/contact">Contact</a>
+                <a class = "spa-shell-head-game" href="/DagovaxGames/dist/game">Game</a>
                 <a href="javascript:void(0);" class="icon" onclick="navBar()">&#9776;</a>
             </div>
         </div>
@@ -81,7 +82,24 @@
 
                 <div class="container">
                     <div class="spa-shell-main-content">
+                        <header class="page-label">
+                            <h1>Home</h1>
+                        </header>
+                        <div class="page-content">
+                            <h3>
+                                Welcome to the official webpage of Sirrianus Dagovax!
+                                Choose your game info or modfolder by hitting it in the menu. All my own mods of Rome: Total War are placed there. I hope you will learn more about modding or my mods. For more info, please contact me.
+                                <br><br><br>
+                                Holland: Total War is now finished!
+                            </h3>
+                            <br><br>
+                            <h1>Dagovax</h1>
+                            <div class="gravatar">
+                                <img src="./images/gravatar.png">
+                            </div>
+                            <br><br>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,6 +136,13 @@
             $('body').addClass('loaded');
         }, 2000);
 
+    });
+</script>
+
+<script>
+    $(function (){
+        //removes availabilty of the user to drag the images
+        $('img').on('dragstart', function(event) { event.preventDefault(); });
     });
 </script>
 

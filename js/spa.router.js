@@ -28,7 +28,7 @@ spa.router = (function () {
         showIsraelModPage,
         showPraetorianCohortPage,
         showContactPage,
-        showQuestionsPage,
+        showGamePage,
         configModule, initModule;
 //----------------- END MODULE SCOPE VARIABLES ---------------
 
@@ -75,10 +75,10 @@ spa.router = (function () {
         jqueryMap.$page_container.html(html);
     };
 
-    showQuestionsPage = function () {
-        console.log('questions');
+    showGamePage = function () {
+        console.log('game');
         var html = spa.template
-            .parseTemplate('features.questions.questions', {});
+            .parseTemplate('features.game.game', {});
         jqueryMap.$page_container.html(html);
     };
 
@@ -129,13 +129,13 @@ spa.router = (function () {
         setJqueryMap();
 
         page.base('');
-        page('/', showHomepage);
+        page('/DagovaxGames/dist/index.html', showHomepage);
         page('/index.html', showHomepage);
-        page('/holland-total-war', showHollandTotalWarPage);
-        page('/israel-mod', showIsraelModPage);
-        page('/praetorian-cohorts', showPraetorianCohortPage);
-        page('/questions', showQuestionsPage);
-        page('/contact', showContactPage);
+        page('/DagovaxGames/dist/holland-total-war', showHollandTotalWarPage);
+        page('/DagovaxGames/dist/israel-mod', showIsraelModPage);
+        page('/DagovaxGames/dist/praetorian-cohorts', showPraetorianCohortPage);
+        page('/DagovaxGames/dist/game', showGamePage);
+        page('/DagovaxGames/dist/contact', showContactPage);
         page();
 
         return true;

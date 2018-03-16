@@ -34,7 +34,7 @@ const files_js_order = [
     'features/**/*.js'
 ];
 
-gulp.task('build', ['html', 'templates', 'css', 'vendor', 'build_js', 'feedback', 'images', 'sass'], function () {
+gulp.task('build', ['html', 'templates', 'css', 'vendor', 'build_js', 'feedback', 'images', 'sass', 'mario'], function () {
 
 });
 
@@ -121,6 +121,11 @@ gulp.task('watch', function () {
         gulp.watch(['images/*', 'images/**/*'], ['images']);
         gulp.watch(['css/*.css', 'features/**/*.css'], ['css']);
         gulp.watch(['js/*.js', 'features/**/*.js'], ['templates','js']);
+});
+
+gulp.task('mario', function () {
+    gulp.src(['mario/**/*.*'])
+        .pipe(gulp.dest('dist/mario_game'));
 });
 
 gulp.task('default', ['templates']);
