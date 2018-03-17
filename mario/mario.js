@@ -4,10 +4,10 @@
 // http://www.supermariojs.com
 
 
-
 function MarioGame(){
 
-    var background_music = new Audio('/DagovaxGames/dist/mario_game/sounds/background_music.wav');
+    var background_music = new Audio('/mario_game/sounds/background_start.wav');
+    var background_looping = new Audio('/mario_game/sounds/background_looping.wav');
     var jumpSoundPlaying = false;
     var dieSoundPlaying = false;
     var dead = false;
@@ -49,7 +49,7 @@ function MarioGame(){
                 if (z.upDown) {
                     z.mario.jump();
                     if (jumpSoundPlaying === false) {
-                        var jump = new Audio('/DagovaxGames/dist/mario_game/sounds/jump_sound.wav');
+                        var jump = new Audio('/mario_game/sounds/jump_sound.wav');
                         jump.play();
                         jumpSoundPlaying = true;
                     }
@@ -253,27 +253,34 @@ if(etop > mtop && etop < mbottom && eleft+2 < mright && eright-2 > mleft){enemy.
                 var z = this;
                 z.mario = new mario();
                 background_music.play();
+                background_music.onended = function() {
+                    background_looping.addEventListener('ended', function () {
+                        this.currentTime = 0;
+                        this.play();
+                    }, false);
+                    background_looping.play();
+                }
 
-                $.getJSON("/DagovaxGames/dist/mario_game/objects.json", function(json){
+                $.getJSON("/mario_game/objects.json", function(json){
                     //console.log("OBJECTS",json);
                     $.each(json, function(k,v){
                         //console.log(v);
                         var x,
                         ig = v.ignore ? true : false;
                         switch(v.type){
-                            case "brick": 	x = new brick('/DagovaxGames/dist/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
+                            case "brick": 	x = new brick('/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
                             case "questionmark":
                                 var r = v.reward ? v.reward : "coin";
-                                x = new questionmark('/DagovaxGames/dist/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig, r);
+                                x = new questionmark('/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig, r);
                             break;
-                            default : x = new gameObject('/DagovaxGames/dist/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
+                            default : x = new gameObject('/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
                         }
 
                         if(x)z.objects.push(x);
                     });
                 });
 
-                $.getJSON("/DagovaxGames/dist/mario_game/enemies.json", function(json){
+                $.getJSON("/mario_game/enemies.json", function(json){
 
                     $.each(json, function(k,v){
                         z.enemies.push(new goomba(v));
@@ -494,7 +501,7 @@ if(cf == 10){z.set({currentFrame : 1});}
 		initialize : function(){
 			var z = this,
 			ci = z.get('currentImage');
-			ci.src = "/DagovaxGames/dist/mario_game/mario.png";
+			ci.src = "/mario_game/mario.png";
 			ci.onload = function(){
 				z.draw();
 			}	
@@ -541,26 +548,32 @@ if(cf == 10){z.set({currentFrame : 1});}
 			if(inv == 0){
   			if(curSize == "big"){
   				z.setSize("small");
-                var hit = new Audio('/DagovaxGames/dist/mario_game/sounds/hit_sound.wav');
+                var hit = new Audio('/mario_game/sounds/hit_sound.wav');
                 hit.play();
   				z.set({"invincible":1});
   			}else{
   				z.die();
-  				if (dieSoundPlaying === false){
-                    var die = new Audio('/DagovaxGames/dist/mario_game/sounds/die_sound.wav');
-                    background_music.pause();
-                    background_music.currentTime = 0;
-                    die.play();
-                    dieSoundPlaying = true;
-                }
   			}
 			}
 
 		},
-		
 		die : function(){
 			var z = this;
             dead = true;
+            if (dieSoundPlaying === false){
+                var die = new Audio('/mario_game/sounds/die_sound.wav');
+                background_music.pause();
+                background_looping.pause();
+                die.play();
+                die.onended = function(){
+					$('#mario').hide();
+                    $('#level').hide();
+                    $('#enemies').hide();
+                    document.getElementById("items").style.backgroundImage = "url('/mario_game/game_over.png')";
+                    $("#items").css({"background-position":"0px 0px"});
+                };
+                dieSoundPlaying = true;
+            }
 			//window.location.reload();
 		}
 	});
@@ -593,7 +606,7 @@ if(cf == 10){z.set({currentFrame : 1});}
 			var z = this;
 			z.set(attributes);
 			var img = z.get('currentImage');
-			img.src = "/DagovaxGames/dist/mario_game/enemies.png";
+			img.src = "/mario_game/enemies.png";
 		},
 		
 		update : function(){
@@ -752,7 +765,7 @@ if(cf == 10){z.set({currentFrame : 1});}
 		gameItem.call(this, i,sx,sy,sw,sh,dx,dy,dw,dh,ig);
 		var z = this;
 		z.y = 0;
-        var coinSound = new Audio('/DagovaxGames/dist/mario_game/sounds/coin_sound.wav');
+        var coinSound = new Audio('/mario_game/sounds/coin_sound.wav');
         coinSound.play();
 		z.update = function(){
 			if(z.y < z.currentDHeight){
@@ -804,7 +817,7 @@ if(cf == 10){z.set({currentFrame : 1});}
 		z.hit = function(){
 			level.mario.setSize("big");
 			z.die();
-			var mushroom = new Audio('/DagovaxGames/dist/mario_game/sounds/mushroom_sound.mp3');
+			var mushroom = new Audio('/mario_game/sounds/mushroom_sound.mp3');
 			mushroom.play();
 		}
 	}
@@ -857,7 +870,7 @@ if(cf == 10){z.set({currentFrame : 1});}
 				z.isBumped = true;
 				if(reward == "mushroom"){
 					level.items.push(new mushroom(z.currentImage.src, 104,0,16,16,z.currentDX, z.currentDY,16,16));
-                    var mushroomGet = new Audio('/DagovaxGames/dist/mario_game/sounds/question_food_sound.wav');
+                    var mushroomGet = new Audio('/mario_game/sounds/question_food_sound.wav');
                     mushroomGet.play();
 				}else{	
 					level.items.push(new coin(z.currentImage.src, 88, 0, 14, 16, z.currentDX, z.currentDY, 14,16));
@@ -898,18 +911,19 @@ if(cf == 10){z.set({currentFrame : 1});}
 		z.h = h;
 	}
 
-	function continueGame() {
-        dead = false;
-    }
-
 	function inits(){
         this.isInit = true;
+        $('#mario').show();
+        $('#level').show();
+        $('#enemies').show();
+        document.getElementById("items").style.backgroundImage = "url('/mario_game/background.png')";
+        $("#items").css({"background-position":"0px 0px"});
 	    level.init();
     }
 
     function reset(){
         background_music.pause();
-        $("#items").css({"background-position":"0px 0px"});
+        background_looping.pause();
         dead = true;
     }
 }

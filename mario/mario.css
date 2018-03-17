@@ -60,3 +60,9 @@ h1, p{
 #reset-button {
     width: 180px;
 }
+
+#game-over {
+    margin: 0 auto;
+    position: absolute;
+    pointer-events: none;
+}

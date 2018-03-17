@@ -48,42 +48,36 @@ spa.router = (function () {
     };
 
     showHomepage = function () {
-        console.log('home');
         var html = spa.template
             .parseTemplate('features.home.home', {});
         jqueryMap.$page_container.html(html);
     };
 
     showHollandTotalWarPage = function () {
-        console.log('holland: total war');
         var html = spa.template
             .parseTemplate('features.hollandtw.hollandtw', {});
         jqueryMap.$page_container.html(html);
     };
 
     showIsraelModPage = function () {
-        console.log('israel mod');
         var html = spa.template
             .parseTemplate('features.israelmod.israelmod', {});
         jqueryMap.$page_container.html(html);
     };
 
     showPraetorianCohortPage = function () {
-        console.log('praetorian cohorts');
         var html = spa.template
             .parseTemplate('features.praetorian_cohort.praetorian_cohort', {});
         jqueryMap.$page_container.html(html);
     };
 
     showGamePage = function () {
-        console.log('game');
         var html = spa.template
             .parseTemplate('features.game.game', {});
         jqueryMap.$page_container.html(html);
     };
 
     showContactPage = function () {
-        console.log('contact');
         var html = spa.template
             .parseTemplate('features.contact.contact', {});
         jqueryMap.$page_container.html(html);
@@ -129,13 +123,13 @@ spa.router = (function () {
         setJqueryMap();
 
         page.base('');
-        page('/DagovaxGames/dist/index.html', showHomepage);
-        page('/index.html', showHomepage);
-        page('/DagovaxGames/dist/holland-total-war', showHollandTotalWarPage);
-        page('/DagovaxGames/dist/israel-mod', showIsraelModPage);
-        page('/DagovaxGames/dist/praetorian-cohorts', showPraetorianCohortPage);
-        page('/DagovaxGames/dist/game', showGamePage);
-        page('/DagovaxGames/dist/contact', showContactPage);
+        page('/', showHomepage);
+        page('/home', showHomepage);
+        page('/holland-total-war', showHollandTotalWarPage);
+        page('/israel-mod', showIsraelModPage);
+        page('/praetorian-cohorts', showPraetorianCohortPage);
+        page('/game', showGamePage);
+        page('/contact', showContactPage);
         page();
 
         return true;

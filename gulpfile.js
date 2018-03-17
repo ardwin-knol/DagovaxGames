@@ -39,9 +39,8 @@ gulp.task('build', ['html', 'templates', 'css', 'vendor', 'build_js', 'feedback'
 });
 
 gulp.task('html', function () {
-    gulp.src(['index.html'])
-        .pipe(gulp.dest('dist/'))
-        .pipe(livereload());
+    gulp.src(['**.html'])
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('css', function () {

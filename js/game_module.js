@@ -8,9 +8,12 @@ function GameModule(){
 
     function init() {
         this.isInit = true;
+        $('#reset-button').hide();
+
         $('#play-button').click(function () {
             if (!gameRunning) {
                 $('#play-button').fadeOut(500);
+                $('#reset-button').fadeIn(500);
                 marioGame.init();
                 gameRunning = true;
             }

@@ -1,0 +1,35 @@
+<script>
+    document.onkeydown = fkey;
+    document.onkeypress = fkey
+    document.onkeyup = fkey;
+
+    var wasPressed = false;
+
+    function fkey(e) {
+        e = e || window.event;
+        if (wasPressed) return;
+
+        if (e.keyCode == 116) {
+            window.location.href = "./index.html";
+            wasPressed = true;
+        }
+    }
+</script>
+<header class="page-label">
+    <h1>Praetorian Cohorts</h1>
+</header>
+<div class="page-content">
+    <h3>
+        This page contains the link to the praetorian cohorts designed by me. Please download the different mods by clicking one of the links below.<br>
+        Each faction has it’s own mod. I strongly recommend to download the whole package (including all cohorts) by clicking the link below:<br><br>
+        (this is the newest version, containing all cohorts!)
+    </h3>
+    <br>
+    <span>
+        <strong>
+            <a href="http://www.mediafire.com/file/weoaxj2cpe5mhhc/Dagovax_Cohorts+v2.0.zip" target="_blank" rel="noopener"><h3>Download all Cohorts (recommended)</h3>
+            </a>
+        </strong>
+    </span>
+    <br><br><br>
+</div>
