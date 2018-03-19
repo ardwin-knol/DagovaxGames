@@ -36,7 +36,7 @@ const files_js_order = [
     'features/**/*.js'
 ];
 
-gulp.task('build', ['html', 'templates', 'css', 'vendor', 'build_js', 'feedback', 'images', 'sass', 'mario'], function () {
+gulp.task('build', ['html', 'templates', 'css', 'vendor', 'js', 'feedback', 'images', 'sass', 'mario'], function () {
 
 });
 
@@ -66,8 +66,8 @@ gulp.task('vendor', function(){
 gulp.task('js', function () {
     return gulp.src(files_js)
         .pipe(order(files_js_order, { base: './' }))
-        .pipe(minify(files_js_order))
-        .pipe(uglify(files_js_order))
+        //.pipe(minify(files_js_order))
+        //.pipe(uglify({ compress: true }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest('dist/js'));
 });

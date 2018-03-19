@@ -12,6 +12,7 @@ function GameModule(){
         $('#reset-button').hide();
 
         $('#play-button').click(function () {
+            feedback.close();
             marioGame.disableSound();
             marioGame.resetFirst();
             if (!gameRunning) {
@@ -23,6 +24,7 @@ function GameModule(){
         })
 
         $('#reset-button').click(function () {
+            feedback.close();
             if (gameRunning && timeReset <=2){
                 marioGame.reset();
                 marioGame.disableSound();

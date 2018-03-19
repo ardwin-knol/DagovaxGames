@@ -4,11 +4,13 @@ function FeedbackWidget(open_button, wrapper_id, close_button){
     this.open_button = open_button;
     this.close_button = close_button;
     this.isInit = false;
-    this.open = open;
+    this.openWidget = openWidget;
     this.close = close;
     this.init = init;
 
+    const OPEN = 'configWidget';
     var isClicked = false;
+    var localStorageCounter = 0;
 
     function init() {
         this.isInit = true;
@@ -18,17 +20,58 @@ function FeedbackWidget(open_button, wrapper_id, close_button){
             if(!isClicked) {
                 open();
             }
-        }
+        };
 
         document.getElementById(this.close_button).onclick = function () {
 
-            if(isClicked) {
+            if (isClicked) {
                 close();
             }
-        }
-    };
+        };
+        window.addEventListener(OPEN, configWidget);
+    }
 
-    function open() {
+    // function config (input, color, button, html){
+    //     openWidget(input, color, button, html);
+    // };
+
+
+    function openWidget(textInput, color, button, htmlCode) {
+
+        if (button){
+            $('#input-text').html(htmlCode);
+        }
+        else{
+            $('#input-text').html('');
+        }
+
+        document.getElementById("widget-top").style.background = color;
+        $('#feedback-title').html('<p>'+textInput+'</p>'
+        );
+
+        updateLocalStorage(textInput);
+
+        var wrap = '#'+wrapper_id;
+        var transparent = '#'+open_button;
+        $(wrap).animate({
+            'right': '0px'
+        }, 1000);
+        $(transparent +' img').animate({
+            opacity:0
+        }, 1000);
+        setTimeout(function() {
+           close();
+        }, 8000);
+        isClicked = true;
+    }
+
+    function open(){
+        var html = document.getElementById('feedback-title').innerText;
+
+        if (html === 'Title'){
+            console.log(html);
+            return;
+        }
         var wrap = '#'+wrapper_id;
         var transparent = '#'+open_button;
         $(wrap).animate({
@@ -38,6 +81,8 @@ function FeedbackWidget(open_button, wrapper_id, close_button){
             opacity:0
         }, 1000);
         isClicked = true;
+
+        setTimeout(function(){ close()}, 10000);
     }
 
     function close() {
@@ -52,47 +97,34 @@ function FeedbackWidget(open_button, wrapper_id, close_button){
         isClicked = false;
     }
 
-    function close_final() {
-        var wrap = '#'+wrapper_id;
-        var transparent = '#'+open_button;
-        $(wrap).animate({
-            'right': '-435px'
-        }, 1000);
-        $(transparent +' img').animate({
-            opacity:1
-        }, 1000);
-        isClicked = false;
-        setTimeout(set_feedbackSubmitted, 1000);
-    }
-
-    function set_feedbackSubmitted(){
-        show_text("<strong>You already submitted your feedback!</strong>");
-        document.getElementById("widget-top").style.background = "orange";
-    }
-
-    function disable_button(){
-        $('#submit-button').hide();
-        $('#textbox-field').hide();
-    }
-
-    function show_text(html) {
-        console.log(html);
-        $('#input-text').html(html);
-    }
-
-    $('#submit-button').click(function(){
-        var user_input = document.getElementById('textbox-field').value;
-        if (user_input == ""){
-            show_text("<strong>  Please enter something before you click 'submit'</strong>");
-            document.getElementById("widget-top").style.background = "red";
+    function updateLocalStorage(text){
+        if (typeof(Storage) !== "undefined") {
+            if (localStorageCounter <=9){
+                localStorageCounter ++;
+                localStorage.setItem(JSON.stringify(localStorageCounter), text);
+            }
+            else if (localStorageCounter >9 ){
+                for (var i = 9; i > 0; i--){
+                    var currentItem = localStorage.getItem(i);
+                    localStorage.setItem(JSON.stringify(i+1), currentItem);
+                }
+                localStorage.setItem(JSON.stringify(1), text);
+            }
+        } else {
+            // Sorry! No Web Storage support..
         }
-        else{
-            show_text("<strong>  Thank you for your feedback!</strong>");
-            disable_button();
-            document.getElementById("widget-top").style.background = "green";
-            setTimeout(close_final, 3000);
-            $('#feedback-title').hide();
-        }
-        console.log(user_input);
-    })
+    }
+
+    //export const createOpenWidgetEvent = (detail) => new CustomEvent(OPEN, { detail });
+
+    const configWidget = ({
+                              detail: {
+                                  text,
+                                  color,
+                                  button,
+                                  htmlCode,
+                              },
+                          }) => {
+        openWidget(text, color, button, htmlCode);
+    };
 }

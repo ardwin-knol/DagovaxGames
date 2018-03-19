@@ -7,7 +7,10 @@
         var gameModule = new GameModule();
         gameModule.init();
 </script>
-
+<script>
+    var event = new CustomEvent('configWidget', {'detail': {text:"Play the impossible mario game now! (The developer forgot to finish it...)", color:"orange", button: false, htmlCode: null}});
+    window.dispatchEvent(event);
+</script>
 <script>
         document.onkeydown = fkey;
         document.onkeypress = fkey
@@ -19,7 +22,7 @@
             e = e || window.event;
             if (wasPressed) return;
 
-            if (e.keyCode == 116) {
+            if (e.keyCode === 116) {
                 window.location.href = "./index.html";
                 wasPressed = true;
             }

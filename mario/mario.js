@@ -585,6 +585,8 @@ if(cf == 10){z.set({currentFrame : 1});}
                     $("#items").css({"background-position":"0px 0px"});
                 };
                 dieSoundPlaying = true;
+                var event = new CustomEvent('configWidget', {'detail': {text:"It seems you died for your first time!", color:"red", button: false, htmlCode: null}});
+                window.dispatchEvent(event);
             }
 			//window.location.reload();
 		}

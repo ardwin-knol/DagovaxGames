@@ -32,13 +32,10 @@
                         <img id="close-button" src="./images/close.png">
                     </div>
                     <div id="widget-bottom">
-                        <p id="feedback-title">Give your feedback belowe and hit 'submit'</p><br>
+                        <br>
+                        <p id="feedback-title">Title</p><br>
                         <div id="input-text">
                         </div>
-                        <form>
-                            <input type="text" id="textbox-field" name="input_text">
-                            <input type="button" id="submit-button" value="Submit">
-                        </form>
                         <br>
                     </div>
                 </div>
@@ -53,8 +50,8 @@
                 <a class = "spa-shell-head-holland-total-war" href="/holland-total-war">Holland: Total War</a>
                 <a class = "spa-shell-head-israel-mod" href="/israel-mod">Israel Mod</a>
                 <a class = "spa-shell-head-praetorian-cohorts" href="/praetorian-cohorts">Praetorian Cohorts</a>
-                <a class = "spa-shell-head-contact" href="/contact">Contact</a>
-                <a class = "spa-shell-head-game" href="/game">Game</a>
+                <a class = "spa-shell-head-contact" onclick="contactMe()" href="/contact">Contact</a>
+                <a class = "spa-shell-head-game" onclick="playMario()" href="/game">Game</a>
                 <a href="javascript:void(0);" class="icon" onclick="navBar()">&#9776;</a>
             </div>
         </div>
@@ -123,9 +120,11 @@
 </script>
 
 <script>
+    var feedback;
     $(function () {
-        var feedbackWidget = new FeedbackWidget('top-image','widget-content', 'close-button');
+        var feedbackWidget = new FeedbackWidget('top-image', 'widget-content', 'close-button');
         feedbackWidget.init();
+        feedback = feedbackWidget;
     });
 </script>
 

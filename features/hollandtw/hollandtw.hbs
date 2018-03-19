@@ -1,4 +1,3 @@
-<head>
     <script>
         document.onkeydown = fkey;
         document.onkeypress = fkey
@@ -16,7 +15,12 @@
             }
         }
     </script>
-</head>
+    <script>
+        var htmlButton= '<strong><br><a title="Download Holland: Total War v3.1 - Mod DB" href="http://www.moddb.com/mods/holland-total-war/downloads/holland-total-war-v31" target="_blank" rel="noopener">'+
+                '<img class="button-center" src="http://button.moddb.com/download/medium/135053.png" alt="Holland: Total War v3.1" style="margin-left: 95px;"/></a></strong>';
+        var event = new CustomEvent('configWidget', {'detail': {text:"Download the newest version for epic content below!", color:"green", button: true, htmlCode: htmlButton}});
+        window.dispatchEvent(event);
+    </script>
 <header class="page-label">
     <h1>Holland: Total War</h1>
 </header>
