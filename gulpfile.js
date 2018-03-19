@@ -8,6 +8,8 @@ var handlebars = require('gulp-handlebars');
 var declare = require('gulp-declare');
 var wrap = require('gulp-wrap');
 var order = require('gulp-order');
+var minify = require('gulp-minify');
+var uglify = require('gulp-uglify');
 
 const files_vendor = [
     'vendor/jquery.event.gevent-master/jquery.event.gevent.js',
@@ -64,11 +66,13 @@ gulp.task('vendor', function(){
 gulp.task('js', function () {
     return gulp.src(files_js)
         .pipe(order(files_js_order, { base: './' }))
+        .pipe(minify(files_js_order))
+        .pipe(uglify(files_js_order))
         .pipe(concat('app.js'))
         .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('build_js', function () {
+gulp.task('watch_js', function () {
     return gulp.src(files_js)
         .pipe(order(files_js_order, { base: './' }))
         .pipe(concat('app.js'))
@@ -110,8 +114,7 @@ gulp.task('templates', function(){
 gulp.task('sass', function () {
     return gulp.src('./sass/**/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./css'))
-        .pipe(livereload());
+        .pipe(gulp.dest('dist/css'))
 });
 
 gulp.task('watch', function () {
@@ -119,7 +122,7 @@ gulp.task('watch', function () {
         gulp.watch(['index.html'], ['html']);
         gulp.watch(['images/*', 'images/**/*'], ['images']);
         gulp.watch(['css/*.css', 'features/**/*.css'], ['css']);
-        gulp.watch(['js/*.js', 'features/**/*.js'], ['templates','js']);
+        gulp.watch(['js/*.js', 'features/**/*.js'], ['templates','watch_js']);
 });
 
 gulp.task('mario', function () {

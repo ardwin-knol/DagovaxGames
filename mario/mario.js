@@ -13,7 +13,9 @@ function MarioGame(){
     var dead = false;
     this.isInit = false;
     this.init = inits;
+    this.resetFirst = resetFirst;
     this.reset = reset;
+    this.disableSound = disableSound;
 
     window.addEventListener("keydown", function(e) {
         // space and arrow keys
@@ -21,6 +23,16 @@ function MarioGame(){
             e.preventDefault();
         }
     }, false);
+
+    if($('.gamelevel').is(!':visible')) {
+        background_music.pause();
+        background_looping.pause();
+    }
+
+    $('a').on('click', function () {
+        background_music.pause();
+        background_looping.pause();
+    });
 
 	var level = {
 		
@@ -913,9 +925,11 @@ if(cf == 10){z.set({currentFrame : 1});}
 
 	function inits(){
         this.isInit = true;
+        dead = false;
         $('#mario').show();
         $('#level').show();
         $('#enemies').show();
+        $('#items').show();
         document.getElementById("items").style.backgroundImage = "url('/mario_game/background.png')";
         $("#items").css({"background-position":"0px 0px"});
 	    level.init();
@@ -925,5 +939,20 @@ if(cf == 10){z.set({currentFrame : 1});}
         background_music.pause();
         background_looping.pause();
         dead = true;
+    }
+
+    function resetFirst(){
+        background_music.pause();
+        background_looping.pause();
+        $('#mario').hide();
+        $('#level').hide();
+        $('#items').hide();
+        $('#enemies').hide();
+        dead = true;
+    }
+
+    function disableSound(){
+        background_music.pause();
+        background_looping.pause();
     }
 }

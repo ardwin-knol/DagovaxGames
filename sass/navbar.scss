@@ -1,0 +1,74 @@
+/* Add a black background color to the top navigation */
+
+.menu-bar {
+  top: 2%;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  margin-top: -20px;
+  border: 1px solid black;
+  height: auto;
+  a {
+    font-family: "Fondamento",cursive;
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: 10px 30px;
+    &:hover {
+      background-color: black;
+      color: white;
+      box-shadow: 0px 0px 10px dodgerblue;
+      font-weight: bold;
+    }
+  }
+}
+
+/* Style the links inside the navigation bar */
+
+/* Change the color of links on hover */
+
+/* Add an active class to highlight the current page */
+
+.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Hide the link that should open and close the menu-bar on small screens */
+
+.menu-bar .icon {
+  display: none;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the menu-bar (.icon) */
+@media screen and (max-width: 1170px) {
+  .menu-bar a {
+    display: none;
+    &.icon {
+      float: right;
+      display: block;
+    }
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the menu-bar look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 1170px) {
+  .menu-bar.responsive {
+    position: relative;
+    a {
+      &.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+}

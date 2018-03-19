@@ -45,7 +45,7 @@
  }
 
 .background {
-     background: url("../resources/splash.png");
+     background: url("./images/splash.png");
      background-color: dodgerblue;
      background-repeat:no-repeat;
      background-size:contain;
