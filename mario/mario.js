@@ -11,6 +11,9 @@ function MarioGame(){
     var jumpSoundPlaying = false;
     var dieSoundPlaying = false;
     var dead = false;
+    var finishObject;
+    var marioObject;
+    var currentMarioCoord;
     this.isInit = false;
     this.init = inits;
     this.resetFirst = resetFirst;
@@ -46,6 +49,7 @@ function MarioGame(){
 		items : [],
 		floors : [],
 		enemies : [],
+        finish : {},
 		activeEnemies : [],
 		objectLevel : document.getElementById("level").getContext("2d"),
 		enemyLevel : document.getElementById("enemies").getContext("2d"),
@@ -73,7 +77,7 @@ function MarioGame(){
                     z.mario.stand();
                     jumpSoundPlaying = false;
                 }
-                z.clear()
+                z.clear();
                 z.mario.draw();
 
                 for (var e = 0; e < z.enemies.length; e++) {
@@ -271,7 +275,7 @@ if(etop > mtop && etop < mbottom && eleft+2 < mright && eright-2 > mleft){enemy.
                         this.play();
                     }, false);
                     background_looping.play();
-                }
+                };
 
                 $.getJSON("/mario_game/objects.json", function(json){
                     //console.log("OBJECTS",json);
@@ -280,6 +284,8 @@ if(etop > mtop && etop < mbottom && eleft+2 < mright && eright-2 > mleft){enemy.
                         var x,
                         ig = v.ignore ? true : false;
                         switch(v.type){
+                            case "finish-flag": x = new finishflag('/mario_game/sprite_flag.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
+                            case "finish": x = new finish('/mario_game/finish.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
                             case "brick": 	x = new brick('/mario_game/objects.png', v.sx, v.sy, v.sw, v.sh, v.dx, v.dy, v.dw, v.dh, ig); break;
                             case "questionmark":
                                 var r = v.reward ? v.reward : "coin";
@@ -298,7 +304,6 @@ if(etop > mtop && etop < mbottom && eleft+2 < mright && eright-2 > mleft){enemy.
                         z.enemies.push(new goomba(v));
                     });
                 });
-
 
                 //var d = new floorObject(0,200, 1104,24);
                 z.floors.push(new floorObject(0,200, 1104,24));
@@ -385,9 +390,12 @@ if(etop > mtop && etop < mbottom && eleft+2 < mright && eright-2 > mleft){enemy.
 			currentFrame:1,
 			invincible:0
 		},
-		
+
 		moveRight : function(){
-			var z = this;
+			var z = this,
+            curDX = z.get('currentDX');
+            marioObject = this;
+            currentMarioCoord = curDX;
 			
 			if(z.get('direction') == z.LEFT && !z.get('isJumping')){
 				z.set({direction:z.RIGHT, currentSX:z.TURN, currentSY:z.RIGHT});
@@ -420,6 +428,8 @@ if(cf == 10){ z.set({currentFrame : 1}); }
 		moveLeft : function(){
 			var z = this,
 			curDX = z.get('currentDX');
+            currentMarioCoord = curDX;
+            marioObject = this;
 			
 			if(z.get('direction') == z.RIGHT && !z.get('isJumping')){
 				z.set({direction:z.LEFT, currentSX:z.TURN, currentSY:z.LEFT});
@@ -835,6 +845,84 @@ if(cf == 10){z.set({currentFrame : 1});}
 			mushroom.play();
 		}
 	}
+
+    finish.prototype = new gameObject();
+    finish.prototype.constructor = finish;
+    function finish(i, sx, sy,sw,sh,dx,dy,dw,dh,ig){
+        //gameObject.call(this);
+        gameObject.call(this, i,sx,sy,sw,sh,dx,dy,dw,dh,ig);
+        var z = this;
+            z.isFinished = false;
+
+        z.hit = function(){
+            z.isFinished = true;
+        };
+
+        z.update = function(){
+            let almostThere = z.currentDX - currentMarioCoord;
+            if( almostThere< 20 ){
+                finishLevel();
+            }
+        }
+    }
+
+    finishflag.prototype = new gameObject();
+    finishflag.prototype.constructor = finishflag;
+    function finishflag(i, sx, sy,sw,sh,dx,dy,dw,dh,ig){
+        //gameObject.call(this);
+        gameObject.call(this, i,sx,sy,sw,sh,dx,dy,dw,dh,ig);
+        var currentFrame = 1;
+        var z = this;
+        finishObject = z;
+        z.isFinished = false;
+
+        z.hit = function(){
+            z.isFinished = true;
+            finishLevel();
+        };
+
+        z.update = function() {
+            if (currentFrame === 1) {
+                z.currentSX = 0;
+                currentFrame++;
+            }
+            if (currentFrame === 2) {
+                z.currentSX += 90;
+                currentFrame++;
+            }
+            if (currentFrame === 3) {
+                z.currentSX += 90;
+                currentFrame++;
+            }
+            if (currentFrame === 4 || currentFrame === 5 || currentFrame === 7 || currentFrame === 10 || currentFrame === 13) {
+                currentFrame++;
+            }
+            if (currentFrame === 6) {
+                z.currentSX = 450;
+                currentFrame++;
+            }
+            if (currentFrame === 8) {
+                z.currentSX = 630;
+                currentFrame++;
+            }
+            if (currentFrame === 9) {
+                z.currentSX += 90;
+                currentFrame++;
+            }
+            if (currentFrame === 11) {
+                z.currentSX = 900;
+                currentFrame++;
+            }
+            if (currentFrame === 12) {
+                z.currentSX += 90;
+                currentFrame++;
+            }
+            if (currentFrame === 14) {
+                z.currentSX = 1170;
+                currentFrame = 1;
+            }
+        }
+    }
 	
 	brick.prototype = new gameObject();
 	brick.prototype.constructor = brick;
@@ -867,7 +955,7 @@ if(cf == 10){z.set({currentFrame : 1});}
 			}
 		}
 	}
-	
+
 	questionmark.prototype = new gameObject();
 	questionmark.prototype.constructor = questionmark;
 	function questionmark(i, sx, sy,sw,sh,dx,dy,dw,dh,ig, reward){
@@ -956,5 +1044,21 @@ if(cf == 10){z.set({currentFrame : 1});}
     function disableSound(){
         background_music.pause();
         background_looping.pause();
+    }
+
+    function finishLevel(){
+	    dead = true;
+	    disableSound();
+        var finishSound = new Audio('/mario_game/sounds/finish_sound.mp3');
+        finishSound.play();
+        finishSound.onended = function(){
+            $('#mario').hide();
+            $('#level').hide();
+            $('#enemies').hide();
+            document.getElementById("items").style.backgroundImage = "url('/mario_game/win.png')";
+            $("#items").css({"background-position":"0px 0px"});
+        };
+        var event = new CustomEvent('configWidget', {'detail': {text:"Congratulations! You won the game!", color:"green", button: false, htmlCode: null}});
+        window.dispatchEvent(event);
     }
 }

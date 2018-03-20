@@ -28,12 +28,12 @@
     gameModule.init();
 </script>
 <script>
-    var event = new CustomEvent('configWidget', {'detail': {text:"Play the impossible mario game now! (The developer forgot to finish it...)", color:"orange", button: false, htmlCode: null}});
+    var event = new CustomEvent('configWidget', {'detail': {text:"Try the game!", color:"orange", button: false, htmlCode: null}});
     window.dispatchEvent(event);
 </script>
 <script>
     document.onkeydown = fkey;
-    document.onkeypress = fkey
+    document.onkeypress = fkey;
     document.onkeyup = fkey;
 
     var wasPressed = false;
