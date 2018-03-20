@@ -8,8 +8,8 @@ var handlebars = require('gulp-handlebars');
 var declare = require('gulp-declare');
 var wrap = require('gulp-wrap');
 var order = require('gulp-order');
-var minify = require('gulp-minify');
-var uglify = require('gulp-uglify');
+const babel = require('gulp-babel');
+var uglify = require('gulp-uglifyjs');
 
 const files_vendor = [
     'vendor/jquery.event.gevent-master/jquery.event.gevent.js',
@@ -66,8 +66,9 @@ gulp.task('vendor', function(){
 gulp.task('js', function () {
     return gulp.src(files_js)
         .pipe(order(files_js_order, { base: './' }))
-        //.pipe(minify(files_js_order))
-        //.pipe(uglify({ compress: true }))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest('dist/js'));
 });

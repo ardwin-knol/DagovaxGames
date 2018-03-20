@@ -9,6 +9,7 @@ function GameModule(){
 
     function init() {
         this.isInit = true;
+        this.start = start;
         $('#reset-button').hide();
 
         $('#play-button').click(function () {
@@ -18,7 +19,7 @@ function GameModule(){
             if (!gameRunning) {
                 $('#play-button').fadeOut(500);
                 $('#reset-button').fadeIn(500);
-                marioGame.init();
+                start();
                 gameRunning = true;
             }
         })
@@ -37,6 +38,10 @@ function GameModule(){
                 $('#reset-button').fadeOut(500);
             }
         })
+
+        function start(){
+            marioGame.init();
+        }
     }
 
     function stopGameMusic(){

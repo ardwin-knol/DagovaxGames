@@ -1,10 +1,8 @@
-function FeedbackWidget(open_button, wrapper_id, close_button){
+spa.feedbackWidget = function(open_button, wrapper_id, close_button){
 
-    this.wrapper_id = wrapper_id;
     this.open_button = open_button;
     this.close_button = close_button;
     this.isInit = false;
-    this.openWidget = openWidget;
     this.close = close;
     this.init = init;
 
