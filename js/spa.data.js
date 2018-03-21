@@ -2,7 +2,7 @@ spa.data = (function () {
     'use strict';
     var
         configMap = {
-            url: spa.model.praetorianCohort.getData()
+            //url: spa.model.praetorianCohort.getData()
 
         },
         ajax;

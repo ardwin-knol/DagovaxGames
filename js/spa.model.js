@@ -16,8 +16,8 @@ spa.model = (function () {
         unitSize,
         weapon,
         armor,
-        faction,
-        praetorianCohort = { gameName, unitSize, weapon, armor, faction };
+        faction, initModule, stateMap,
+        //praetorianCohort = { gameName, unitSize, weapon, armor, faction };
 
     // The cart object API
     // -------------------

@@ -44,6 +44,7 @@ spa.feedbackWidget = function(open_button, wrapper_id, close_button){
         }
 
         document.getElementById("widget-top").style.background = color;
+        document.getElementById("widget-top").style.borderBottomColor = color;
         $('#feedback-title').html('<p>'+textInput+'</p>'
         );
 
